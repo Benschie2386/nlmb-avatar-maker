@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#09070d">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Lustly – Party Game</title>
+<style>
+:root{--bg:#09070d;--panel:#15101d;--panel2:#20152b;--pink:#ff4fa3;--violet:#9a5cff;--text:#fff;--muted:#b8aebe;--good:#4ee6a5;--bad:#ff637d}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:radial-gradient(circle at 50% -10%,#3a1647 0,#120b19 35%,var(--bg) 65%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Inter,Arial,sans-serif;min-height:100svh}
+button,input{font:inherit}
+.app{width:min(100%,520px);margin:auto;min-height:100svh;padding:env(safe-area-inset-top) 18px env(safe-area-inset-bottom);display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px 2px 10px}
+.logo{font-weight:900;letter-spacing:-1px;font-size:25px}.logo span{color:var(--pink)}
+.icon{border:0;background:#ffffff12;color:#fff;width:42px;height:42px;border-radius:14px}
+.screen{display:none;flex:1}.screen.active{display:flex;flex-direction:column}
+.hero{padding:38px 4px 24px}.eyebrow{color:var(--pink);font-weight:800;text-transform:uppercase;font-size:12px;letter-spacing:1.5px}
+h1{font-size:42px;line-height:.98;margin:9px 0 14px;letter-spacing:-2px}h2{font-size:27px;margin:8px 0}
+p{color:var(--muted);line-height:1.45}
+.card{background:linear-gradient(145deg,#21152b,#120d18);border:1px solid #ffffff12;border-radius:24px;padding:20px;box-shadow:0 16px 50px #0006}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mode{text-align:left;min-height:120px}
+.mode b{display:block;font-size:18px;margin-top:28px}.mode small{color:var(--muted)}
+.btn{border:0;border-radius:18px;padding:16px 18px;font-weight:850;color:#fff;background:linear-gradient(135deg,var(--pink),var(--violet));box-shadow:0 10px 28px #ff4fa344}
+.btn.secondary{background:#ffffff10;box-shadow:none}.btn.good{background:var(--good);color:#07140e}.btn.bad{background:var(--bad)}.btn:active{transform:scale(.98)}
+.stack{display:flex;flex-direction:column;gap:12px}.spacer{flex:1}
+.input{width:100%;background:#ffffff0c;border:1px solid #ffffff16;color:#fff;border-radius:16px;padding:15px;outline:none}
+.players{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.pill{padding:9px 12px;border-radius:999px;background:#ffffff0d;color:#ddd}
+.topline{display:flex;justify-content:space-between;align-items:center;margin:8px 0 14px}
+.timer{font-size:25px;font-weight:900;color:var(--pink)}.score{font-weight:800}
+.playcard{min-height:350px;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:26px;background:linear-gradient(155deg,#2a1535,#110b17)}
+.target{font-size:36px;font-weight:950;letter-spacing:-1.5px;margin:12px 0 22px}
+.taboo{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.taboo span{background:#ffffff0d;border:1px solid #ffffff10;padding:8px 11px;border-radius:999px;color:#ddd}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.actions .wide{grid-column:1/-1}
+.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 0 10px}.nav button{background:transparent;border:0;color:#8e8495;padding:10px}.nav button.active{color:#fff}
+.modal{position:fixed;inset:0;background:#0009;display:none;align-items:flex-end;justify-content:center;padding:18px}.modal.show{display:flex}.sheet{width:min(520px,100%);background:#17111f;border:1px solid #ffffff15;border-radius:26px;padding:22px}
+.small{font-size:12px;color:#968a9d}.center{text-align:center}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="logo">Lust<span>ly</span></div><button class="icon" id="settings">⚙︎</button></header>
+
+<section id="welcome" class="screen active">
+  <div class="hero">
+    <div class="eyebrow">Private Party Game</div>
+    <h1>Frech.<br>Mutig.<br>Gemeinsam.</h1>
+    <p>Ein erwachsenes Karten- und Partyspiel im Tabu-Stil – direkt auf deinem Handy und ohne Internet.</p>
+  </div>
+  <div class="spacer"></div>
+  <div class="stack">
+    <button class="btn" id="start">Spiel starten</button>
+    <button class="btn secondary" id="how">So funktioniert's</button>
+  </div>
+</section>
+
+<section id="home" class="screen">
+  <div class="hero" style="padding-top:18px">
+    <div class="eyebrow">Neue Runde</div><h2>Wählt euren Modus</h2>
+    <p>Legt das Handy in die Mitte und los geht's.</p>
+  </div>
+  <div class="grid">
+    <button class="card mode" data-mode="classic"><span>🩷</span><b>Klassisch</b><small>Begriffe erklären</small></button>
+    <button class="card mode" data-mode="hot"><span>🔥</span><b>Heißer</b><small>Frecher & persönlicher</small></button>
+    <button class="card mode" data-mode="challenge"><span>😈</span><b>Mutprobe</b><small>Kurze Challenges</small></button>
+    <button class="card mode" data-mode="couples"><span>💕</span><b>Paare</b><small>Für zwei</small></button>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn secondary" id="playersBtn">Spieler verwalten</button>
+</section>
+
+<section id="setup" class="screen">
+  <div class="hero" style="padding-top:18px"><div class="eyebrow">Vorbereitung</div><h2 id="setupTitle">Klassisch</h2><p>Mindestens zwei Spieler sind ideal. Namen bleiben nur auf diesem Gerät.</p></div>
+  <div class="card">
+    <input class="input" id="playerInput" placeholder="Spielername eingeben" maxlength="18">
+    <button class="btn" id="addPlayer" style="width:100%;margin-top:10px">Spieler hinzufügen</button>
+    <div class="players" id="playerList"></div>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn" id="begin">Runde starten</button>
+</section>
+
+<section id="game" class="screen">
+  <div class="topline"><div><div class="small">AM ZUG</div><b id="turnName">Spieler</b></div><div class="timer" id="timer">45</div><div class="score">⭐ <span id="score">0</span></div></div>
+  <div class="card playcard">
+    <div class="small" id="category">BEGRIFF ERKLÄREN</div>
+    <div class="target" id="target">KÜSSEN</div>
+    <div class="taboo" id="taboo"></div>
+  </div>
+  <div class="actions">
+    <button class="btn good" id="correct">✓ Richtig</button>
+    <button class="btn bad" id="skip">✕ Tabu / falsch</button>
+    <button class="btn secondary wide" id="next">Nächste Karte</button>
+  </div>
+  <div class="spacer"></div>
+  <button class="btn secondary" id="end">Runde beenden</button>
+</section>
+
+<section id="result" class="screen">
+  <div class="hero center"><div class="eyebrow">Runde beendet</div><h1 id="winner">Stark gespielt!</h1><p id="resultText"></p></div>
+  <div class="card"><h2>🏆 Ergebnis</h2><div id="results"></div></div>
+  <div class="spacer"></div><button class="btn" id="again">Neue Runde</button>
+</section>
+
+<section id="playersScreen" class="screen">
+  <div class="hero" style="padding-top:18px"><div class="eyebrow">Lobby</div><h2>Spieler</h2><p>Diese Namen werden lokal gespeichert.</p></div>
+  <div class="card"><div class="players" id="savedPlayers"></div><button class="btn secondary" id="clearPlayers">Namen löschen</button></div>
+  <div class="spacer"></div><button class="btn" id="backHome">Zurück</button>
+</section>
+
+<div class="modal" id="modal"><div class="sheet"><h2 id="modalTitle">So funktioniert's</h2><p id="modalText">Ein Spieler hält das Handy. Er erklärt den großen Begriff, ohne die verbotenen Wörter zu sagen. Das Team entscheidet gemeinsam: richtig oder falsch. Nach Ablauf des Timers wechselt der Spieler.</p><button class="btn" id="closeModal" style="width:100%">Alles klar</button></div></div>
+
+<nav class="nav"><button id="navHome" class="active">⌂<br><span class="small">Start</span></button><button id="navCards">▣<br><span class="small">Karten</span></button><button id="navProfile">●<br><span class="small">Spieler</span></button></nav>
+</div>
+
+<script>
+const decks={
+classic:[
+["KÜSSEN",["Lippen","Mund","Liebe","Zunge","Knutschen"]],
+["DATE",["Restaurant","Treffen","Partner","Abend","Verabredung"]],
+["FLIRTEN",["Blick","Kompliment","Chat","Interesse","Anmachen"]],
+["MASSAGE",["Rücken","Hände","Öl","Entspannung","Berührung"]],
+["GEHEIMNIS",["Sagen","Wissen","Verraten","Vertrauen","Geheim"]],
+["ROMANTIK",["Liebe","Herz","Kerze","Blumen","Gefühle"]],
+["VERFÜHRUNG",["Anmachen","Reiz","Attraktiv","Nähe","Flirten"]],
+["KUSCHELN",["Decke","Umarmen","Sofa","Nähe","Schlafen"]],
+["FANTASIE",["Wunsch","Vorstellung","Traum","Idee","Denken"]],
+["KOMPLIMENT",["Lob","Schön","Aussehen","Nett","Sagen"]]],
+hot:[
+["GEHEIMWUNSCH",["Fantasie","Wunsch","Geheim","Sagen","Traum"]],
+["SEXY",["Attraktiv","Körper","Heiß","Reiz","Erotisch"]],
+["VERFÜHREN",["Flirten","Küssen","Reiz","Nähe","Anmachen"]],
+["NACKT",["Kleidung","Ausziehen","Körper","Dusche","Ohne"]],
+["PRICKELN",["Kribbeln","Haut","Gefühl","Spannung","Aufregung"]]],
+challenge:[
+["AUGENKONTAKT",["Blick","Augen","Schauen","Ansehen","Starren"]],
+["KOMPLIMENT",["Lob","Schön","Sagen","Nett","Aussehen"]],
+["FLIRT",["Anmachen","Blick","Charme","Date","Interesse"]],
+["MUT",["Trauen","Angst","Tapfer","Wagen","Feigling"]],
+["GEHEIMNIS",["Verraten","Sagen","Wissen","Geheim","Erzählen"]]],
+couples:[
+["ERSTES DATE",["Kennenlernen","Treffen","Restaurant","Partner","Abend"]],
+["KUSCHELN",["Umarmen","Sofa","Decke","Nähe","Schlafen"]],
+["LIEBLINGSMOMENT",["Erinnerung","Zusammen","Zeit","Schön","Moment"]],
+["ROMANTISCH",["Kerzen","Liebe","Blumen","Date","Herz"]],
+["FANTASIE",["Wunsch","Traum","Vorstellung","Geheim","Idee"]]]
+};
+let players=JSON.parse(localStorage.getItem("lustlyPlayers")||"[]");
+let mode="classic",deck=[],idx=0,timer=45,interval=null,scores={};
+
+const $=id=>document.getElementById(id);
+function show(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));$(id).classList.add("active")}
+function renderPlayers(){
+  $("playerList").innerHTML=players.map((p,i)=>`<span class="pill">${p} <button onclick="removePlayer(${i})" style="border:0;background:none;color:#aaa">×</button></span>`).join("");
+}
+window.removePlayer=i=>{players.splice(i,1);savePlayers();renderPlayers()}
+function savePlayers(){localStorage.setItem("lustlyPlayers",JSON.stringify(players))}
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function newCard(){
+  if(!deck.length) deck=shuffle(decks[mode]);
+  const c=deck.pop(); $("target").textContent=c[0];$("taboo").innerHTML=c[1].map(x=>`<span>${x}</span>`).join("");
+}
+function startTimer(){
+ clearInterval(interval);timer=45;$("timer").textContent=timer;
+ interval=setInterval(()=>{timer--;$("timer").textContent=timer;if(timer<=0){clearInterval(interval);$("timer").textContent="0";}},1000);
+}
+function setup(modeName){
+ mode=modeName;$("setupTitle").textContent={classic:"Klassisch",hot:"Heißer",challenge:"Mutprobe",couples:"Paare"}[mode];
+ renderPlayers();show("setup");
+}
+function beginGame(){
+ if(players.length<2){$("modalTitle").textContent="Noch Spieler hinzufügen";$("modalText").textContent="Füge mindestens zwei Spieler hinzu, bevor ihr startet."; $("modal").classList.add("show");return}
+ scores={};players.forEach(p=>scores[p]=0);idx=0;deck=shuffle(decks[mode]);$("turnName").textContent=players[idx];$("score").textContent=0;newCard();show("game");startTimer();
+}
+$("start").onclick=()=>show("home");
+$("how").onclick=()=>{ $("modalTitle").textContent="So funktioniert's";$("modalText").textContent="Ein Spieler hält das Handy. Er erklärt den großen Begriff, ohne die verbotenen Wörter zu sagen. Das Team entscheidet: richtig oder falsch. 45 Sekunden pro Zug. 1 Punkt pro richtigem Begriff.";$("modal").classList.add("show")};
+$("closeModal").onclick=()=>$("modal").classList.remove("show");
+document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>setup(b.dataset.mode));
+$("addPlayer").onclick=()=>{let v=$("playerInput").value.trim();if(v&&!players.includes(v)){players.push(v);savePlayers();$("playerInput").value="";renderPlayers()}};
+$("playerInput").addEventListener("keydown",e=>{if(e.key==="Enter")$("addPlayer").click()});
+$("begin").onclick=beginGame;
+$("correct").onclick=()=>{scores[players[idx]]++;$("score").textContent=scores[players[idx]];newCard()};
+$("skip").onclick=()=>newCard();
+$("next").onclick=()=>newCard();
+$("end").onclick=()=>{clearInterval(interval);let sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);$("winner").textContent=sorted[0][0];$("resultText").textContent=`${sorted[0][0]} gewinnt mit ${sorted[0][1]} Punkt${sorted[0][1]===1?"":"en"}.`;$("results").innerHTML=sorted.map((x,i)=>`<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #ffffff10"><span>${i+1}. ${x[0]}</span><b>${x[1]} ⭐</b></div>`).join("");show("result")};
+$("again").onclick=()=>show("home");
+$("playersBtn").onclick=()=>{renderSaved();show("playersScreen")};
+$("backHome").onclick=()=>show("home");
+$("clearPlayers").onclick=()=>{players=[];savePlayers();renderSaved();renderPlayers()};
+function renderSaved(){$("savedPlayers").innerHTML=players.length?players.map(p=>`<span class="pill">${p}</span>`).join(""):"<span class='small'>Noch keine Spieler gespeichert.</span>"}
+$("navHome").onclick=()=>show("home");
+$("navCards").onclick=()=>{$("modalTitle").textContent="Karten";$("modalText").textContent="Wähle einen Modus auf dem Startbildschirm. Die Karten werden zufällig aus dem jeweiligen lokalen Deck gezogen.";$("modal").classList.add("show")};
+$("navProfile").onclick=()=>{renderSaved();show("playersScreen")};
+$("settings").onclick=()=>{$("modalTitle").textContent="Offline-Modus";$("modalText").textContent="Diese Version speichert Spieler und Spielstand ausschließlich lokal auf dem Gerät. Es wird kein Server benötigt.";$("modal").classList.add("show")};
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body>
+</html>
