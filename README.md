@@ -1,2 +1,1 @@
-# lustly
-Lustly – Offline Party Card Game
+#NLMB Avatar Maker – Offline Roblox-style Avatar Creator
