@@ -2,198 +2,76 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#09070d">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070510">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>NLMB Avatar Maker</title>
 <link rel="manifest" href="manifest.webmanifest">
-<title>Lustly – Party Game</title>
 <style>
-:root{--bg:#09070d;--panel:#15101d;--panel2:#20152b;--pink:#ff4fa3;--violet:#9a5cff;--text:#fff;--muted:#b8aebe;--good:#4ee6a5;--bad:#ff637d}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;background:radial-gradient(circle at 50% -10%,#3a1647 0,#120b19 35%,var(--bg) 65%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Inter,Arial,sans-serif;min-height:100svh}
-button,input{font:inherit}
-.app{width:min(100%,520px);margin:auto;min-height:100svh;padding:env(safe-area-inset-top) 18px env(safe-area-inset-bottom);display:flex;flex-direction:column}
-header{display:flex;align-items:center;justify-content:space-between;padding:18px 2px 10px}
-.logo{font-weight:900;letter-spacing:-1px;font-size:25px}.logo span{color:var(--pink)}
-.icon{border:0;background:#ffffff12;color:#fff;width:42px;height:42px;border-radius:14px}
-.screen{display:none;flex:1}.screen.active{display:flex;flex-direction:column}
-.hero{padding:38px 4px 24px}.eyebrow{color:var(--pink);font-weight:800;text-transform:uppercase;font-size:12px;letter-spacing:1.5px}
-h1{font-size:42px;line-height:.98;margin:9px 0 14px;letter-spacing:-2px}h2{font-size:27px;margin:8px 0}
-p{color:var(--muted);line-height:1.45}
-.card{background:linear-gradient(145deg,#21152b,#120d18);border:1px solid #ffffff12;border-radius:24px;padding:20px;box-shadow:0 16px 50px #0006}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mode{text-align:left;min-height:120px}
-.mode b{display:block;font-size:18px;margin-top:28px}.mode small{color:var(--muted)}
-.btn{border:0;border-radius:18px;padding:16px 18px;font-weight:850;color:#fff;background:linear-gradient(135deg,var(--pink),var(--violet));box-shadow:0 10px 28px #ff4fa344}
-.btn.secondary{background:#ffffff10;box-shadow:none}.btn.good{background:var(--good);color:#07140e}.btn.bad{background:var(--bad)}.btn:active{transform:scale(.98)}
-.stack{display:flex;flex-direction:column;gap:12px}.spacer{flex:1}
-.input{width:100%;background:#ffffff0c;border:1px solid #ffffff16;color:#fff;border-radius:16px;padding:15px;outline:none}
-.players{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.pill{padding:9px 12px;border-radius:999px;background:#ffffff0d;color:#ddd}
-.topline{display:flex;justify-content:space-between;align-items:center;margin:8px 0 14px}
-.timer{font-size:25px;font-weight:900;color:var(--pink)}.score{font-weight:800}
-.playcard{min-height:350px;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:26px;background:linear-gradient(155deg,#2a1535,#110b17)}
-.target{font-size:36px;font-weight:950;letter-spacing:-1.5px;margin:12px 0 22px}
-.taboo{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.taboo span{background:#ffffff0d;border:1px solid #ffffff10;padding:8px 11px;border-radius:999px;color:#ddd}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.actions .wide{grid-column:1/-1}
-.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 0 10px}.nav button{background:transparent;border:0;color:#8e8495;padding:10px}.nav button.active{color:#fff}
-.modal{position:fixed;inset:0;background:#0009;display:none;align-items:flex-end;justify-content:center;padding:18px}.modal.show{display:flex}.sheet{width:min(520px,100%);background:#17111f;border:1px solid #ffffff15;border-radius:26px;padding:22px}
-.small{font-size:12px;color:#968a9d}.center{text-align:center}
-</style>
-</head>
+:root{--bg:#070510;--panel:#0d0915;--panel2:#130d1d;--line:#392052;--purple:#a83cff;--purple2:#7129ff;--text:#f7f2ff;--muted:#9b8eaa;--good:#42e6a0}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:radial-gradient(circle at 50% 0,#2c1252 0,transparent 38%),radial-gradient(circle at 90% 80%,#17103b 0,transparent 30%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input{font:inherit}.app{min-height:100vh;display:flex}.side{width:225px;position:fixed;inset:0 auto 0 0;background:#08060df5;border-right:1px solid var(--line);padding:18px 13px;z-index:20}.logo{text-align:center;font-size:31px;font-weight:1000;letter-spacing:-2px;text-shadow:0 0 20px var(--purple)}.logo small{display:block;font-size:11px;letter-spacing:4px;color:#d47cff;margin-top:-2px}.nav{display:grid;gap:5px;margin-top:25px}.nav button{border:1px solid transparent;background:transparent;color:#bcaecb;border-radius:10px;padding:11px 13px;text-align:left;cursor:pointer}.nav button:hover,.nav button.active{color:#fff;background:linear-gradient(90deg,#251037,#100b19);border-color:#9d3fe0;box-shadow:inset 3px 0 #c34dff,0 0 18px #a83cff18}.main{margin-left:225px;width:calc(100% - 225px);padding:17px;max-width:1500px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.eyebrow{font-size:10px;letter-spacing:3px;color:#ce72ff;font-weight:900}.title{font-size:28px;font-weight:950}.status{font-size:11px;padding:8px 11px;border:1px solid #27513e;background:#07130e;border-radius:9px;color:#92f3c7}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 10px var(--good);margin-right:7px}
+.creator{display:grid;grid-template-columns:minmax(390px,1fr) 430px;gap:13px}.preview,.controls{border:1px solid var(--line);border-radius:16px;background:linear-gradient(#110b19,#08070e);overflow:hidden}.preview{min-height:720px;position:relative}.preview:before{content:"NLMB";position:absolute;left:50%;top:25px;transform:translateX(-50%) skew(-10deg);font-size:86px;font-weight:1000;letter-spacing:-7px;color:#fff08}.ph{padding:13px 15px;border-bottom:1px solid #301b42;display:flex;justify-content:space-between;position:relative;z-index:4}.stage{position:absolute;inset:50px 0 0;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle,#35145d66,transparent 48%)}.stage:after{content:"";position:absolute;bottom:-100px;width:500px;height:280px;border-radius:50%;border:2px solid #a642ff55;box-shadow:0 0 55px #9c2cff33}.floor{position:absolute;bottom:-75px;width:650px;height:320px;opacity:.23;background-image:linear-gradient(#a34cff55 1px,transparent 1px),linear-gradient(90deg,#a34cff55 1px,transparent 1px);background-size:35px 35px;transform:perspective(320px) rotateX(62deg)}
+.avatar{width:250px;height:500px;position:relative;z-index:2;filter:drop-shadow(0 25px 25px #000c)}.part{position:absolute;left:50%;transform:translateX(-50%)}.head{top:70px;width:132px;height:110px;background:linear-gradient(135deg,#b8794f,#e1a171);border:3px solid #08060b;border-radius:23px 23px 30px 30px;z-index:4}.neck{top:145px;width:45px;height:33px;background:#b8794f;border:3px solid #08060b;border-radius:8px;z-index:2}.body{top:158px;width:132px;height:181px;background:linear-gradient(90deg,#090d14,#232a38);border:3px solid #06070b;border-radius:20px 20px 28px 28px;z-index:2}.arm{top:170px;width:45px;height:140px;background:linear-gradient(90deg,#0d1119,#242d3b);border:3px solid #06070b;border-radius:25px;z-index:1}.arm.l{margin-left:-100px;transform:translateX(-50%) rotate(5deg)}.arm.r{margin-left:100px;transform:translateX(-50%) rotate(-5deg)}.hand{top:298px;width:41px;height:39px;background:#d99a69;border:3px solid #08070b;border-radius:14px}.hand.l{margin-left:-106px}.hand.r{margin-left:106px}.leg{top:338px;width:57px;height:110px;background:linear-gradient(90deg,#080b12,#252c38);border:3px solid #06070b;border-radius:9px 9px 15px 15px;z-index:2}.leg.l{margin-left:-39px}.leg.r{margin-left:39px}.shoe{top:431px;width:73px;height:44px;background:linear-gradient(135deg,#111522,#672cff);border:3px solid #06070b;border-radius:9px 24px 12px 12px;box-shadow:0 0 15px #7c34ff77}.shoe.l{margin-left:-45px}.shoe.r{margin-left:45px;transform:translateX(-50%) scaleX(-1)}.pants{top:333px;width:130px;height:116px;background:linear-gradient(90deg,#080b12,#252b37,#080b12);border:3px solid #06070b;border-radius:8px 8px 15px 15px;z-index:3}.hood{top:158px;width:132px;height:181px;background:linear-gradient(140deg,#07090e,#1d1d29);border:3px solid #05060a;border-radius:20px 20px 28px 28px;z-index:5}.hood:after{content:"NLMB";position:absolute;top:70px;left:50%;transform:translateX(-50%) skew(-8deg);font-size:25px;font-weight:1000;color:#c04cff;text-shadow:0 0 13px #a22cff}.hair{top:51px;width:143px;height:76px;background:#050507;border-radius:55% 48% 28% 24%;z-index:6;box-shadow:0 0 14px #842cff44}.mask{top:116px;width:115px;height:60px;background:#090c13;border:3px solid #05060a;border-radius:9px 9px 28px 28px;z-index:7}.eyes{top:104px;width:104px;height:30px;z-index:8;display:flex;justify-content:space-between;padding:0 10px}.eye{width:25px;height:12px;border-radius:50%;background:#bf42ff;box-shadow:0 0 7px #bf42ff,0 0 20px #bf42ff,0 0 38px #bf42ff}.eyes.blue .eye{background:#42a0ff;box-shadow:0 0 7px #42a0ff,0 0 20px #42a0ff,0 0 38px #42a0ff}.eyes.red .eye{background:#ff315b;box-shadow:0 0 7px #ff315b,0 0 20px #ff315b,0 0 38px #ff315b}.eyes.green .eye{background:#37ef9a;box-shadow:0 0 7px #37ef9a,0 0 20px #37ef9a,0 0 38px #37ef9a}.eyes.white .eye{background:#fff;box-shadow:0 0 7px #fff,0 0 20px #fff,0 0 38px #fff}.eyes.off .eye{background:#39404c;box-shadow:none}.crown{top:18px;font-size:76px;color:#b65cff;text-shadow:0 0 14px #9b2cff;z-index:9}.wings{top:160px;width:300px;height:190px;z-index:0}.wings:before,.wings:after{content:"";position:absolute;top:0;width:130px;height:185px;background:linear-gradient(150deg,#7b2cff,#161020 48%,#e32655);clip-path:polygon(50% 0,100% 22%,72% 36%,100% 53%,67% 57%,92% 78%,55% 70%,62% 100%,30% 78%,0 62%,24% 45%,3% 29%,39% 32%);filter:drop-shadow(0 0 9px #7d25ff)}.wings:before{left:0;transform:scaleX(-1)}.wings:after{right:0}.aura{top:115px;width:335px;height:390px;border-radius:50%;box-shadow:0 0 50px #9a2cff30 inset}.aura:before{content:"";position:absolute;inset:5px;border:2px dashed #a13cff55;border-radius:50%;animation:spin 12s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.hidden{display:none!important}
+.controls{display:flex;flex-direction:column}.body2{padding:12px;overflow:auto}.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.cat,.choice,.swatch,.action,.toggle{border:1px solid #35204b;background:#0c0912;color:#bcaecb;border-radius:9px;cursor:pointer}.cat{padding:9px 5px;font-size:11px}.cat.active,.cat:hover,.choice.selected,.choice:hover{border-color:var(--purple);background:#251034;color:#fff;box-shadow:0 0 14px #a83cff22}.section{font-size:12px;font-weight:800;margin:12px 0 7px}.choices{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.choice{height:65px;padding:5px;font-size:10px}.swatches{display:flex;gap:7px;flex-wrap:wrap}.swatch{width:31px;height:31px}.swatch.selected{border-color:white;box-shadow:0 0 12px #b844ff66}.row{display:flex;justify-content:space-between;align-items:center;margin:10px 0}.toggle{padding:6px 11px}.toggle.on{background:#7129a5;border-color:#c34dff;color:white}.range{width:100%;accent-color:#b544ff}.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:13px}.action{padding:11px;color:#fff}.primary{background:linear-gradient(135deg,#7d29ff,#c13eff);border-color:#d56aff;font-weight:800}.saved{margin-top:10px}.saved-item{padding:8px;margin-top:6px;border:1px solid #2d1c3d;border-radius:8px;background:#0c0911;font-size:11px;display:flex;justify-content:space-between}.saved-item button{background:none;border:0;color:#d27cff;cursor:pointer}
+@media(max-width:900px){.creator{grid-template-columns:1fr}.controls{order:2}.preview{min-height:650px}}
+@media(max-width:600px){.side{top:auto;bottom:0;width:100%;height:62px;padding:4px;border-right:0;border-top:1px solid var(--line)}.logo{display:none}.nav{display:flex;justify-content:space-around;margin:0}.nav button{font-size:0;padding:10px}.nav button:before{font-size:19px}.nav button:nth-child(1):before{content:"🧍"}.nav button:nth-child(2):before{content:"👕"}.nav button:nth-child(3):before{content:"😎"}.nav button:nth-child(4):before{content:"💇"}.nav button:nth-child(5):before{content:"👑"}.nav button:nth-child(6):before{content:"🪽"}.nav button:nth-child(7):before{content:"✨"}.main{margin:0 0 62px;width:100%;padding:10px}.title{font-size:23px}.preview{min-height:560px}.avatar{transform:scale(.82)}}
+</style></head>
 <body>
-<div class="app">
-<header><div class="logo">Lust<span>ly</span></div><button class="icon" id="settings">⚙︎</button></header>
-
-<section id="welcome" class="screen active">
-  <div class="hero">
-    <div class="eyebrow">Private Party Game</div>
-    <h1>Frech.<br>Mutig.<br>Gemeinsam.</h1>
-    <p>Ein erwachsenes Karten- und Partyspiel im Tabu-Stil – direkt auf deinem Handy und ohne Internet.</p>
-  </div>
-  <div class="spacer"></div>
-  <div class="stack">
-    <button class="btn" id="start">Spiel starten</button>
-    <button class="btn secondary" id="how">So funktioniert's</button>
-  </div>
-</section>
-
-<section id="home" class="screen">
-  <div class="hero" style="padding-top:18px">
-    <div class="eyebrow">Neue Runde</div><h2>Wählt euren Modus</h2>
-    <p>Legt das Handy in die Mitte und los geht's.</p>
-  </div>
-  <div class="grid">
-    <button class="card mode" data-mode="classic"><span>🩷</span><b>Klassisch</b><small>Begriffe erklären</small></button>
-    <button class="card mode" data-mode="hot"><span>🔥</span><b>Heißer</b><small>Frecher & persönlicher</small></button>
-    <button class="card mode" data-mode="challenge"><span>😈</span><b>Mutprobe</b><small>Kurze Challenges</small></button>
-    <button class="card mode" data-mode="couples"><span>💕</span><b>Paare</b><small>Für zwei</small></button>
-  </div>
-  <div class="spacer"></div>
-  <button class="btn secondary" id="playersBtn">Spieler verwalten</button>
-</section>
-
-<section id="setup" class="screen">
-  <div class="hero" style="padding-top:18px"><div class="eyebrow">Vorbereitung</div><h2 id="setupTitle">Klassisch</h2><p>Mindestens zwei Spieler sind ideal. Namen bleiben nur auf diesem Gerät.</p></div>
-  <div class="card">
-    <input class="input" id="playerInput" placeholder="Spielername eingeben" maxlength="18">
-    <button class="btn" id="addPlayer" style="width:100%;margin-top:10px">Spieler hinzufügen</button>
-    <div class="players" id="playerList"></div>
-  </div>
-  <div class="spacer"></div>
-  <button class="btn" id="begin">Runde starten</button>
-</section>
-
-<section id="game" class="screen">
-  <div class="topline"><div><div class="small">AM ZUG</div><b id="turnName">Spieler</b></div><div class="timer" id="timer">45</div><div class="score">⭐ <span id="score">0</span></div></div>
-  <div class="card playcard">
-    <div class="small" id="category">BEGRIFF ERKLÄREN</div>
-    <div class="target" id="target">KÜSSEN</div>
-    <div class="taboo" id="taboo"></div>
-  </div>
-  <div class="actions">
-    <button class="btn good" id="correct">✓ Richtig</button>
-    <button class="btn bad" id="skip">✕ Tabu / falsch</button>
-    <button class="btn secondary wide" id="next">Nächste Karte</button>
-  </div>
-  <div class="spacer"></div>
-  <button class="btn secondary" id="end">Runde beenden</button>
-</section>
-
-<section id="result" class="screen">
-  <div class="hero center"><div class="eyebrow">Runde beendet</div><h1 id="winner">Stark gespielt!</h1><p id="resultText"></p></div>
-  <div class="card"><h2>🏆 Ergebnis</h2><div id="results"></div></div>
-  <div class="spacer"></div><button class="btn" id="again">Neue Runde</button>
-</section>
-
-<section id="playersScreen" class="screen">
-  <div class="hero" style="padding-top:18px"><div class="eyebrow">Lobby</div><h2>Spieler</h2><p>Diese Namen werden lokal gespeichert.</p></div>
-  <div class="card"><div class="players" id="savedPlayers"></div><button class="btn secondary" id="clearPlayers">Namen löschen</button></div>
-  <div class="spacer"></div><button class="btn" id="backHome">Zurück</button>
-</section>
-
-<div class="modal" id="modal"><div class="sheet"><h2 id="modalTitle">So funktioniert's</h2><p id="modalText">Ein Spieler hält das Handy. Er erklärt den großen Begriff, ohne die verbotenen Wörter zu sagen. Das Team entscheidet gemeinsam: richtig oder falsch. Nach Ablauf des Timers wechselt der Spieler.</p><button class="btn" id="closeModal" style="width:100%">Alles klar</button></div></div>
-
-<nav class="nav"><button id="navHome" class="active">⌂<br><span class="small">Start</span></button><button id="navCards">▣<br><span class="small">Karten</span></button><button id="navProfile">●<br><span class="small">Spieler</span></button></nav>
-</div>
-
+<div class="app"><aside class="side"><div class="logo">NLMB<small>AVATAR MAKER</small></div><nav class="nav">
+<button class="active" data-cat="Körper">🧍 Körper</button><button data-cat="Kleidung">👕 Kleidung</button><button data-cat="Gesicht">😎 Gesicht</button><button data-cat="Haare">💇 Haare</button><button data-cat="Accessoires">👑 Accessoires</button><button data-cat="Rücken">🪽 Rücken</button><button data-cat="Effekte">✨ Effekte</button>
+</nav></aside>
+<main class="main"><header class="top"><div><div class="eyebrow">CREATE • CUSTOMIZE • BE UNIQUE</div><div class="title">NLMB Avatar Maker</div></div><div class="status"><span class="dot"></span>Offline Ready</div></header>
+<div class="creator">
+<section class="preview"><div class="ph"><b>Avatar Vorschau</b><span id="info">NLMB Legend</span></div><div class="stage"><div class="floor"></div><div class="avatar">
+<div id="aura" class="part aura"></div><div id="wings" class="part wings"></div>
+<div class="part leg l"></div><div class="part leg r"></div><div class="part pants"></div>
+<div class="part shoe l"></div><div class="part shoe r"></div><div class="part body"></div><div id="hood" class="part hood"></div>
+<div class="part arm l"></div><div class="part arm r"></div><div class="part hand l"></div><div class="part hand r"></div>
+<div class="part neck"></div><div id="skinHead" class="part head"></div><div id="hair" class="part hair"></div>
+<div id="mask" class="part mask"></div><div id="eyes" class="part eyes"><i class="eye"></i><i class="eye"></i></div><div id="crown" class="part crown">♛</div>
+</div></div></section>
+<section class="controls"><div class="ph"><div><div class="eyebrow">CUSTOMIZATION</div><b id="panelTitle">Körper</b></div></div><div class="body2"><div class="cats">
+<button class="cat active" data-cat="Körper">Körper</button><button class="cat" data-cat="Haare">Haare</button><button class="cat" data-cat="Gesicht">Gesicht</button><button class="cat" data-cat="Kleidung">Kleidung</button><button class="cat" data-cat="Accessoires">Access.</button><button class="cat" data-cat="Rücken">Rücken</button><button class="cat" data-cat="Effekte">Effekte</button>
+</div><div id="panel"></div><div class="actions"><button class="action" id="random">🎲 Zufälliger Avatar</button><button class="action primary" id="save">💾 Outfit speichern</button></div><div class="saved" id="saved"></div></div></section>
+</div></main></div>
 <script>
-const decks={
-classic:[
-["KÜSSEN",["Lippen","Mund","Liebe","Zunge","Knutschen"]],
-["DATE",["Restaurant","Treffen","Partner","Abend","Verabredung"]],
-["FLIRTEN",["Blick","Kompliment","Chat","Interesse","Anmachen"]],
-["MASSAGE",["Rücken","Hände","Öl","Entspannung","Berührung"]],
-["GEHEIMNIS",["Sagen","Wissen","Verraten","Vertrauen","Geheim"]],
-["ROMANTIK",["Liebe","Herz","Kerze","Blumen","Gefühle"]],
-["VERFÜHRUNG",["Anmachen","Reiz","Attraktiv","Nähe","Flirten"]],
-["KUSCHELN",["Decke","Umarmen","Sofa","Nähe","Schlafen"]],
-["FANTASIE",["Wunsch","Vorstellung","Traum","Idee","Denken"]],
-["KOMPLIMENT",["Lob","Schön","Aussehen","Nett","Sagen"]]],
-hot:[
-["GEHEIMWUNSCH",["Fantasie","Wunsch","Geheim","Sagen","Traum"]],
-["SEXY",["Attraktiv","Körper","Heiß","Reiz","Erotisch"]],
-["VERFÜHREN",["Flirten","Küssen","Reiz","Nähe","Anmachen"]],
-["NACKT",["Kleidung","Ausziehen","Körper","Dusche","Ohne"]],
-["PRICKELN",["Kribbeln","Haut","Gefühl","Spannung","Aufregung"]]],
-challenge:[
-["AUGENKONTAKT",["Blick","Augen","Schauen","Ansehen","Starren"]],
-["KOMPLIMENT",["Lob","Schön","Sagen","Nett","Aussehen"]],
-["FLIRT",["Anmachen","Blick","Charme","Date","Interesse"]],
-["MUT",["Trauen","Angst","Tapfer","Wagen","Feigling"]],
-["GEHEIMNIS",["Verraten","Sagen","Wissen","Geheim","Erzählen"]]],
-couples:[
-["ERSTES DATE",["Kennenlernen","Treffen","Restaurant","Partner","Abend"]],
-["KUSCHELN",["Umarmen","Sofa","Decke","Nähe","Schlafen"]],
-["LIEBLINGSMOMENT",["Erinnerung","Zusammen","Zeit","Schön","Moment"]],
-["ROMANTISCH",["Kerzen","Liebe","Blumen","Date","Herz"]],
-["FANTASIE",["Wunsch","Traum","Vorstellung","Geheim","Idee"]]]
+const S={eyes:"purple",glow:true,glowStrength:100,mask:true,crown:true,wings:true,aura:true,skin:"#b8794f",hair:"#050507",name:"NLMB Legend"};
+const panelData={
+"Körper":()=>`<div class=section>Hautfarbe</div><div class=swatches>${["#b8794f","#d99a69","#e7b78d","#8c5739","#f0c8a4"].map(c=>`<button class="swatch ${S.skin==c?"selected":""}" style="background:${c}" data-skin="${c}"></button>`).join("")}</div><div class=section>Körper-Preset</div><div class=choices>${["Classic","Athletic","Slim","Heavy"].map(x=>`<button class=choice data-info="${x}">🧍<br>${x}</button>`).join("")}</div>`,
+"Haare":()=>`<div class=section>Frisur</div><div class=choices>${["Messy","Spiky","Short","Long","Legend","Shadow","Crown Cut","Wild"].map((x,i)=>`<button class=choice data-hair="${i}">💇<br>${x}</button>`).join("")}</div><div class=section>Haarfarbe</div><div class=swatches>${["#050507","#fff","#8c3cff","#e52c51","#5f6877","#d9a26b","#2f78ff","#31d98d"].map(c=>`<button class="swatch ${S.hair==c?"selected":""}" style="background:${c}" data-haircolor="${c}"></button>`).join("")}</div>`,
+"Gesicht":()=>`<div class=section>Leuchtende Augen</div><div class=row><span>Glow</span><button class="toggle ${S.glow?"on":""}" id=glow>${S.glow?"AN":"AUS"}</button></div><div class=section>Augenfarbe</div><div class=choices>${[["purple","🟣 Lila"],["blue","🔵 Blau"],["red","🔴 Rot"],["green","🟢 Grün"],["white","⚪ Weiß"]].map(a=>`<button class="choice ${S.eyes==a[0]?"selected":""}" data-eyes="${a[0]}">${a[1]}</button>`).join("")}</div><div class=section>Leuchtkraft: <span id=gv>${S.glowStrength}%</span></div><input class=range id=gr type=range min=0 max=150 value="${S.glowStrength}">`,
+"Kleidung":()=>`<div class=section>Oberteil</div><div class=choices>${["NLMB Hoodie","Black Hoodie","Cyber Jacket","Legend Armor"].map(x=>`<button class=choice data-info="${x}">👕<br>${x}</button>`).join("")}</div><div class=section>Hosen & Schuhe</div><div class=choices>${["Cargo Black","Ripped Black","Purple Boots","Legend Boots"].map(x=>`<button class=choice data-info="${x}">👖<br>${x}</button>`).join("")}</div>`,
+"Accessoires":()=>`<div class=section>Kopf</div><div class=choices>${["Keine","👑 Krone","😈 Hörner","🎩 Hut"].map((x,i)=>`<button class=choice ${i==1?"selected":""} data-access="${i}">${x}</button>`).join("")}</div><div class=section>Maske</div><div class=row><span>Maske anzeigen</span><button class="toggle ${S.mask?"on":""}" id=mask>${S.mask?"AN":"AUS"}</button></div>`,
+"Rücken":()=>`<div class=section>Back Item</div><div class=choices>${["Keine","🪽 Dark Wings","🔥 Demon Wings","⚡ Energy Wings","👼 Light Wings"].map((x,i)=>`<button class=choice data-back="${i}">${x}</button>`).join("")}</div>`,
+"Effekte":()=>`<div class=section>Aura</div><div class=row><span>Avatar-Aura</span><button class="toggle ${S.aura?"on":""}" id=aura>${S.aura?"AN":"AUS"}</button></div><div class=section>Effekt-Stil</div><div class=choices>${["Purple Ring","Blue Energy","Red Flame","Dark Void"].map(x=>`<button class=choice data-info="${x}">✨<br>${x}</button>`).join("")}</div>`
 };
-let players=JSON.parse(localStorage.getItem("lustlyPlayers")||"[]");
-let mode="classic",deck=[],idx=0,timer=45,interval=null,scores={};
-
-const $=id=>document.getElementById(id);
-function show(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));$(id).classList.add("active")}
-function renderPlayers(){
-  $("playerList").innerHTML=players.map((p,i)=>`<span class="pill">${p} <button onclick="removePlayer(${i})" style="border:0;background:none;color:#aaa">×</button></span>`).join("");
+function apply(){
+ const e=document.getElementById("eyes");e.className="part eyes "+S.eyes+(S.glow?"":" off");e.style.opacity=Math.max(.12,Math.min(1.5,S.glowStrength/100));
+ document.getElementById("mask").classList.toggle("hidden",!S.mask);document.getElementById("crown").classList.toggle("hidden",!S.crown);document.getElementById("wings").classList.toggle("hidden",!S.wings);document.getElementById("aura").classList.toggle("hidden",!S.aura);
+ document.getElementById("skinHead").style.background=S.skin;document.getElementById("hair").style.background=S.hair;
 }
-window.removePlayer=i=>{players.splice(i,1);savePlayers();renderPlayers()}
-function savePlayers(){localStorage.setItem("lustlyPlayers",JSON.stringify(players))}
-function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
-function newCard(){
-  if(!deck.length) deck=shuffle(decks[mode]);
-  const c=deck.pop(); $("target").textContent=c[0];$("taboo").innerHTML=c[1].map(x=>`<span>${x}</span>`).join("");
+function bind(cat){
+ document.querySelectorAll("[data-skin]").forEach(b=>b.onclick=()=>{S.skin=b.dataset.skin;apply();panel(cat)});
+ document.querySelectorAll("[data-haircolor]").forEach(b=>b.onclick=()=>{S.hair=b.dataset.haircolor;apply();panel(cat)});
+ document.querySelectorAll("[data-eyes]").forEach(b=>b.onclick=()=>{S.eyes=b.dataset.eyes;apply();panel(cat)});
+ document.querySelectorAll("[data-hair]").forEach(b=>b.onclick=()=>{document.getElementById("hair").style.filter=`hue-rotate(${+b.dataset.hair*37}deg) saturate(1.25)`;info("Frisur: "+b.textContent.trim())});
+ document.querySelectorAll("[data-access]").forEach(b=>b.onclick=()=>{S.crown=b.dataset.access=="1";apply();info("Kopf-Accessoire geändert")});
+ document.querySelectorAll("[data-back]").forEach(b=>b.onclick=()=>{S.wings=b.dataset.back!="0";apply();info("Rücken-Item geändert")});
+ document.querySelectorAll("[data-info]").forEach(b=>b.onclick=()=>info(b.dataset.info));
+ const g=document.getElementById("glow");if(g)g.onclick=()=>{S.glow=!S.glow;apply();panel(cat)};
+ const m=document.getElementById("mask");if(m)m.onclick=()=>{S.mask=!S.mask;apply();panel(cat)};
+ const a=document.getElementById("aura");if(a)a.onclick=()=>{S.aura=!S.aura;apply();panel(cat)};
+ const r=document.getElementById("gr");if(r)r.oninput=()=>{S.glowStrength=+r.value;document.getElementById("gv").textContent=r.value+"%";apply()};
 }
-function startTimer(){
- clearInterval(interval);timer=45;$("timer").textContent=timer;
- interval=setInterval(()=>{timer--;$("timer").textContent=timer;if(timer<=0){clearInterval(interval);$("timer").textContent="0";}},1000);
-}
-function setup(modeName){
- mode=modeName;$("setupTitle").textContent={classic:"Klassisch",hot:"Heißer",challenge:"Mutprobe",couples:"Paare"}[mode];
- renderPlayers();show("setup");
-}
-function beginGame(){
- if(players.length<2){$("modalTitle").textContent="Noch Spieler hinzufügen";$("modalText").textContent="Füge mindestens zwei Spieler hinzu, bevor ihr startet."; $("modal").classList.add("show");return}
- scores={};players.forEach(p=>scores[p]=0);idx=0;deck=shuffle(decks[mode]);$("turnName").textContent=players[idx];$("score").textContent=0;newCard();show("game");startTimer();
-}
-$("start").onclick=()=>show("home");
-$("how").onclick=()=>{ $("modalTitle").textContent="So funktioniert's";$("modalText").textContent="Ein Spieler hält das Handy. Er erklärt den großen Begriff, ohne die verbotenen Wörter zu sagen. Das Team entscheidet: richtig oder falsch. 45 Sekunden pro Zug. 1 Punkt pro richtigem Begriff.";$("modal").classList.add("show")};
-$("closeModal").onclick=()=>$("modal").classList.remove("show");
-document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>setup(b.dataset.mode));
-$("addPlayer").onclick=()=>{let v=$("playerInput").value.trim();if(v&&!players.includes(v)){players.push(v);savePlayers();$("playerInput").value="";renderPlayers()}};
-$("playerInput").addEventListener("keydown",e=>{if(e.key==="Enter")$("addPlayer").click()});
-$("begin").onclick=beginGame;
-$("correct").onclick=()=>{scores[players[idx]]++;$("score").textContent=scores[players[idx]];newCard()};
-$("skip").onclick=()=>newCard();
-$("next").onclick=()=>newCard();
-$("end").onclick=()=>{clearInterval(interval);let sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);$("winner").textContent=sorted[0][0];$("resultText").textContent=`${sorted[0][0]} gewinnt mit ${sorted[0][1]} Punkt${sorted[0][1]===1?"":"en"}.`;$("results").innerHTML=sorted.map((x,i)=>`<div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #ffffff10"><span>${i+1}. ${x[0]}</span><b>${x[1]} ⭐</b></div>`).join("");show("result")};
-$("again").onclick=()=>show("home");
-$("playersBtn").onclick=()=>{renderSaved();show("playersScreen")};
-$("backHome").onclick=()=>show("home");
-$("clearPlayers").onclick=()=>{players=[];savePlayers();renderSaved();renderPlayers()};
-function renderSaved(){$("savedPlayers").innerHTML=players.length?players.map(p=>`<span class="pill">${p}</span>`).join(""):"<span class='small'>Noch keine Spieler gespeichert.</span>"}
-$("navHome").onclick=()=>show("home");
-$("navCards").onclick=()=>{$("modalTitle").textContent="Karten";$("modalText").textContent="Wähle einen Modus auf dem Startbildschirm. Die Karten werden zufällig aus dem jeweiligen lokalen Deck gezogen.";$("modal").classList.add("show")};
-$("navProfile").onclick=()=>{renderSaved();show("playersScreen")};
-$("settings").onclick=()=>{$("modalTitle").textContent="Offline-Modus";$("modalText").textContent="Diese Version speichert Spieler und Spielstand ausschließlich lokal auf dem Gerät. Es wird kein Server benötigt.";$("modal").classList.add("show")};
-if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
-</script>
-</body>
-</html>
+function panel(cat){document.getElementById("panelTitle").textContent=cat;document.getElementById("panel").innerHTML=panelData[cat]();bind(cat)}
+function info(t){document.getElementById("info").textContent=t}
+function randomize(){S.eyes=["purple","blue","red","green","white"][Math.floor(Math.random()*5)];S.glow=Math.random()>.2;S.mask=Math.random()>.2;S.crown=Math.random()>.45;S.wings=Math.random()>.2;S.aura=Math.random()>.3;S.skin=["#b8794f","#d99a69","#e7b78d","#8c5739"][Math.floor(Math.random()*4)];S.hair=["#050507","#fff","#8c3cff","#e52c51","#5f6877","#2f78ff"][Math.floor(Math.random()*6)];apply();info("Zufälliger Avatar");panel("Körper")}
+function save(){let x=JSON.parse(localStorage.getItem("nlmb_avatar_outfits")||"[]");x.unshift({date:new Date().toLocaleString("de-DE"),state:{...S}});localStorage.setItem("nlmb_avatar_outfits",JSON.stringify(x.slice(0,20)));renderSaved();info("Outfit gespeichert")}
+function renderSaved(){let x=JSON.parse(localStorage.getItem("nlmb_avatar_outfits")||"[]");document.getElementById("saved").innerHTML=x.slice(0,5).map((o,i)=>`<div class=saved-item><span>💾 Outfit ${x.length-i}</span><button onclick="loadSaved(${i})">Laden</button></div>`).join("")}
+function loadSaved(i){let x=JSON.parse(localStorage.getItem("nlmb_avatar_outfits")||"[]")[i];if(!x)return;Object.assign(S,x.state);apply();info("Outfit geladen")}
+document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-cat]").forEach(x=>x.classList.toggle("active",x==b));panel(b.dataset.cat)});
+document.getElementById("random").onclick=randomize;document.getElementById("save").onclick=save;panel("Körper");apply();renderSaved();
+if("serviceWorker"in navigator)navigator.serviceWorker.register("./sw.js");
+</script></body></html>
