@@ -1,1 +1,9 @@
-{"name":"NLMB Avatar Maker","short_name":"NLMB Avatar Maker","id":"./","start_url":"./","display":"standalone","background_color":"#070510","theme_color":"#070510","orientation":"portrait","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml"}]}
+{
+  "name":"NLMB Avatar Maker V2",
+  "short_name":"NLMB Avatar",
+  "start_url":".",
+  "display":"standalone",
+  "background_color":"#07050d",
+  "theme_color":"#090611",
+  "icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml"}]
+}
